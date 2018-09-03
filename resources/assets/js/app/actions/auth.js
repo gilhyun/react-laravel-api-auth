@@ -5,8 +5,6 @@ import Cookies from 'js-cookie';
 
 const axios = window.axios;
 
-console.log('cookie', Cookies.get('LB_TOKEN'));
-
 async function checkAuth() {
     authStore.accessToken = Cookies.get('LB_TOKEN');
     const user = await getUser();
@@ -59,7 +57,7 @@ export const login = (email, password, callback) => {
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET
     })).then(response => {
-        Cookies.set('LB_TOKEN', response.data.access_token, { expires: 30 });
+        Cookies.set('LB_TOKEN', response.data.access_token, { expires: 1 });
         callback(true);
         authStore.accessToken = response.data.access_token;
         getUser();
@@ -73,7 +71,7 @@ export const logout = () => {
     authStore.accessToken = null;
     authStore.isAuth = false;
     authStore.user = {};
-//    Cookies.remove('LB_TOKEN');
+    Cookies.remove('LB_TOKEN');
 };
 
 export {getUser};
