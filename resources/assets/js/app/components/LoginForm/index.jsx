@@ -58,6 +58,7 @@ class LoginForm extends Component {
             );
         }
         return (
+            <form>
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
@@ -94,7 +95,7 @@ class LoginForm extends Component {
 
                                 <div className="form-group row mb-0">
                                     <div className="col-md-8 offset-md-4">
-                                        <Button loading={this.state.isFetching} className="btn btn-primary" onClick={this.clickHandler}>
+                                        <Button type="submit" loading={this.state.isFetching} className="btn btn-primary" onClick={this.clickHandler}>
                                             Login
                                         </Button>
 
@@ -106,6 +107,7 @@ class LoginForm extends Component {
                     </div>
                 </div>
             </div>
+            </form>
         );
     }
 }

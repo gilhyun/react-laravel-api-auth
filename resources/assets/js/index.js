@@ -9,12 +9,13 @@ import WelcomePage from "./app/components/WelcomePage";
 import LoginForm from './app/components/LoginForm/index';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import RegisterForm from "./app/components/RegisterForm";
+import {appStore} from "./app/store/app";
 
 window.axios = axios;
 
 initAuth();
 
-const App = inject('authStore')(observer(({authStore}) => {
+const App = inject('authStore', 'store')(observer(({authStore}) => {
     return (
         <Router>
             <div>
@@ -32,7 +33,7 @@ const App = inject('authStore')(observer(({authStore}) => {
 
 if (document.getElementById('app-root')) {
     ReactDOM.render(
-        <Provider authStore={authStore}>
+        <Provider authStore={authStore} store={appStore}>
             <App />
         </Provider>,
         document.getElementById('app-root'));
