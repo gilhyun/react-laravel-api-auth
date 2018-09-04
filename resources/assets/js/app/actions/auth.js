@@ -6,8 +6,9 @@ import Cookies from 'js-cookie';
 const axios = window.axios;
 
 async function checkAuth() {
-    authStore.accessToken = Cookies.get('LB_TOKEN');
-    const user = await getUser();
+    let user = {};
+    if (authStore.accessToken = Cookies.get('LB_TOKEN'))
+        user = await getUser();
     if (authStore.accessToken && authStore.user !== {}) {
         authStore.isAuth = true;
         return user;

@@ -35,4 +35,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_ID'), // App ID
+        'client_secret' => env('FACEBOOK_SECRET'), // App Secret
+        'redirect' => 'http://localhost:8000/socialite/facebook/callback', //Ссылка на перенаправление при удачной авторизации (3)
+    ],
 ];

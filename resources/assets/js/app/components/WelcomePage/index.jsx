@@ -22,6 +22,7 @@ class WelcomePage extends Component {
             return (
                 <Fragment>
                     <Link to={'/login'}>Login</Link>
+                    <a href="/socialite/facebook">Via Facebook</a>
                     <Link to={'/register'}>Register</Link>
                 </Fragment>
             );
