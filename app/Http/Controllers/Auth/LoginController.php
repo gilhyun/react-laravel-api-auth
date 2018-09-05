@@ -56,9 +56,9 @@ class LoginController extends Controller
             'scope' => '*',
         ]);
         $tokenRequest = Request::create('/oauth/token','post', $request->all());
-        $result = Route::dispatch($tokenRequest);
-        var_dump(json_decode($result->getContent(), true));
-//        setcookie('LB_TOKEN', $token);
+        $result = json_decode(Route::dispatch($tokenRequest)->getContent(), true);
+        var_dump($result['access_token']);
+        setcookie('LB_TOKEN', $result['access_token']);
 //        dd($token);
     }
 }
