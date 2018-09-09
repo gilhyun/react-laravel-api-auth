@@ -23,6 +23,7 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
+    "auth0-js": "^9.7.3",
     "js-cookie": "^2.2.0",
     "mobx": "^5.1.0",
     "mobx-react": "^5.2.5",

@@ -5,8 +5,17 @@ import '../../styles/laravel.css';
 import {logout} from "../../actions/auth";
 import {Preloader} from "../Preloader";
 import FadeIn from 'react-fade-in';
+import {Spinner} from "../Preloader/spinner";
 
 class WelcomePage extends Component {
+
+    socialHandler = ev => {
+        const { authStore } = this.props;
+        const { auth0 } = authStore;
+        this.props.store.isLogging = true;
+        ev.preventDefault();
+        auth0.authorize();
+    };
 
     header = () => {
         const { authStore } = this.props;
@@ -14,7 +23,7 @@ class WelcomePage extends Component {
             return (
                 <Fragment>
                     <Link to={'/dashboard'}>Dashboard</Link>
-                    <a className="a" onClick={logout} style={{'cursor': 'pointer'}}>Logout ({authStore.user.name})</a>
+                    <Link to={'/logout'} onClick={() => logout()}>Logout ({authStore.user.name})</Link>
                 </Fragment>
             );
         }
@@ -22,7 +31,7 @@ class WelcomePage extends Component {
             return (
                 <Fragment>
                     <Link to={'/login'}>Login</Link>
-                    <a href="/socialite/facebook">Via Facebook</a>
+                    <a href="" onClick={this.socialHandler}>Via Facebook</a>
                     <Link to={'/register'}>Register</Link>
                 </Fragment>
             );
@@ -31,8 +40,7 @@ class WelcomePage extends Component {
 
     componentDidMount() {
         const { store } = this.props;
-        store.isLoading = true;
-        setTimeout(() => store.isLoading = false, 700);
+        store.isLoading = false;
     }
 
     render()
@@ -41,6 +49,10 @@ class WelcomePage extends Component {
 
         if (store.isLoading) {
             return <Preloader/>;
+        }
+
+        if (store.isLogging) {
+            return <Spinner/>;
         }
 
         return (

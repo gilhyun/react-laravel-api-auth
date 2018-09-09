@@ -1,4 +1,6 @@
 import {observable, decorate, computed} from 'mobx';
+import auth0 from "auth0-js";
+import {AUTH0_CLIENT_ID, AUTH0_DOMAIN, AUTH0_REDIRECT_URL} from "../constants";
 
 class AuthStore {
     isAuth = false;
@@ -20,6 +22,13 @@ class AuthStore {
         return this.__accessToken;
     }
 
+    auth0 = new auth0.WebAuth({
+        domain: AUTH0_DOMAIN,
+        clientID: AUTH0_CLIENT_ID,
+        redirectUri: AUTH0_REDIRECT_URL,
+        responseType: 'token id_token',
+        scope: 'openid profile'
+    });
 }
 
 decorate(AuthStore, {

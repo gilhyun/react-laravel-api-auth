@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import {Provider} from 'mobx-react';
 import {authStore} from "./app/store/auth";
-import {initAuth} from "./app/actions/auth";
+import {initAuth, logout} from "./app/actions/auth";
 import {inject, observer} from 'mobx-react';
 import WelcomePage from "./app/components/WelcomePage";
 import LoginForm from './app/components/LoginForm/index';
 import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import RegisterForm from "./app/components/RegisterForm";
 import {appStore} from "./app/store/app";
+import {handleAuthentication} from "./app/actions/socialLogin";
 
 window.axios = axios;
 
@@ -25,6 +26,14 @@ const App = inject('authStore', 'store')(observer(({authStore}) => {
                 }}/>
                 <Route path="/register" render={() => {
                     return authStore.isAuth ? (<Redirect to="/"/>) : <RegisterForm/>
+                }}/>
+                <Route path="/social/callback" render={props => {
+                    appStore.isLogging = true;
+                    handleAuthentication(props);
+                    return <Redirect to="/"/>
+                }}/>
+                <Route path="/logout" render={() => {
+                    return <Redirect to="/"/>
                 }}/>
             </div>
         </Router>

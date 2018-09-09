@@ -58,7 +58,7 @@ export const login = (email, password, callback) => {
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET
     })).then(response => {
-        Cookies.set('LB_TOKEN', response.data.access_token, { expires: 1 });
+        Cookies.set('LB_TOKEN', response.data.access_token);
         callback(true);
         authStore.accessToken = response.data.access_token;
         getUser();
@@ -69,10 +69,10 @@ export const login = (email, password, callback) => {
 };
 
 export const logout = () => {
+    Cookies.remove('LB_TOKEN');
     authStore.accessToken = null;
     authStore.isAuth = false;
     authStore.user = {};
-    Cookies.remove('LB_TOKEN');
 };
 
 export {getUser};

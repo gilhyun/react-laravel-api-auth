@@ -23,7 +23,12 @@ class InitialSeeder extends Seeder
                 'name' => 'Peter Johnson',
                 'email' => 'peter@mail.ru',
                 'password' => Hash::make('petr123'),
-            ]
+            ],
+            [
+                'name' => 'Orion',
+                'email' => 'root@orion.dev',
+                'password' => Hash::make('qweqwe'),
+            ],
         ]);
     }
 }

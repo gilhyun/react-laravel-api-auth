@@ -11,7 +11,5 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/socialite/{provider}', 'Auth\LoginController@redirectToProvider');
-Route::get('/socialite/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-
+Route::any('/login/social', 'Auth\LoginController@socialLogin');
 Route::any('/{path?}', function () { return view('welcome'); })->where("path", ".+");
